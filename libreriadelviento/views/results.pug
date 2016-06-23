@@ -1,0 +1,27 @@
+div(class="listado")
+    div(class="col-xs-12 col-lg-8 col-lg-offset-2", ng-controller="ShowBookController")
+        div(ng-if="resultados && resultados.length > 0" ng-cloak)
+            br
+            table.table.table-striped
+                thead.cabecera-tabla
+                    tr: th Libro
+                        th Título
+                        th Autor
+                        th Editorial
+                        th Paginas
+                tbody
+                    tr(ng-repeat="resultado in resultados")
+                        td(ng-if="resultado.thumbnail"): img(ng-src="{{resultado.thumbnail}}", class="tapa-libro")
+                        td(ng-if="!resultado.thumbnail && resultado.imageLinks"): img(ng-src="resultado.imageLinks.thumbnail", class="tapa-libro")
+                        td(ng-if="!resultado.thumbnail && !resultado.imageLinks"): img(ng-src='http://fillmurray.com/220/314', class="tapa-libro")
+                        td.item-info-xs 
+                            p {{resultado.title}}
+                            
+                        td(class="hidden-xs precio text-center" style="vertical-align:middle")
+                                p(ng-if="resultado.saleInfo && resultado.saleInfo.retailPrice").
+                                    ${{resultado.saleInfo.retailPrice.amount}}
+                                p(ng-if="!resultado.saleInfo.retailPrice").
+                                 No disponible
+        div(ng-if="resultados && resultados.length === 0 && busqueda" ng-cloak)
+            br
+            h4.text-center No se encontraron resultados para "{{form.search_term}}"
