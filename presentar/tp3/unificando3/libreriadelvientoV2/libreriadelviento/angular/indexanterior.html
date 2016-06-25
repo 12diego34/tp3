@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Librería del Viento</title>
+    <link rel="shortcut icon" href="http://www.dit.ing.unp.edu.ar/wp-content/uploads/favicon.png" type="image/x-icon" />
+	<!-- Cargamos bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<!-- Cargamos angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<!-- Cargamos el javascript de angular -->
+	<script src="core.js"></script>
+</head>
+<body ng-controller="libroController">
+	<div class="well">
+		<div class="jumbotron text-center" ng-prueba>
+			<h1>Libros<span class="label label-success"></span></h1>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<table class="table table-striped">
+					<tr class="info">
+						<td>ISBN</td>
+						<td>Nombre</td>
+						<td>Precio</td>
+						<td>Editorial</td>
+						<td>Autor</td>
+						<td>Ranking</td>
+						<td>Genero</td>
+						<td>Paginas</td>
+					</tr>
+					<tr ng-repeat="libro in libros" ng-click="selectLibro(libro)">
+						<td>{{ libro.isbn }}</td>
+						<td>{{ libro.nombre }}</td>
+						<td>{{ libro.preciolocal }}</td>
+						<td>{{ libro.editorial}}</td>
+						<td>{{ libro.autor }}</td>
+						<td>{{ libro.ranking }}</td>
+						<td>{{ libro.genero }}</td>
+						<td>{{ libro.paginas }}</td>
+					</tr>
+				</table>					
+			</div>
+			<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="ISBN" ng-model="newLibro.isbn" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newLibro.nombre" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Precio" ng-model="newLibro.preciolocal" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Editorial" ng-model="newLibro.editorial" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Autor" ng-model="newLibro.autor" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Ranking" ng-model="newLibro.ranking" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Genero" ng-model="newLibro.genero" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Pagina" ng-model="newLibro.paginas" required>
+					</div>
+
+					<!-- Acciones que podemos realizar en el formulario -->
+					<button type="submit" class="btn btn-success btn-lg" ng-click="registrarLibro()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarLibro(newLibro)" ng-disabled="!newPersona.nombre || !newPersona.apellido || !newPersona.edad || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.apellido || !newPersona.edad || !selected">Borrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
